@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-form-field>
+    <mat-label>Pretraga</mat-label>
+    <input matInput type="text" [(ngModel)]="searchInput" />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <span class="spacer"></span>
+  <mat-form-field appearance="fill">
+    <mat-label>Sortiranje</mat-label>
+    <mat-select>
+      <mat-option value="1" (click)="sortProducts('asc')"
+        >Cena rastuće</mat-option
+      >
+      <mat-option value="2" (click)="sortProducts('desc')"
+        >Cena opadajuće</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</mat-card>
+<div class="container">
+  <app-single-product
+    *ngFor="let product of products | filter: searchInput:'name'"
+    [product]="product"
+  ></app-single-product>
+</div>

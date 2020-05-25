@@ -1,0 +1,14 @@
+mat-card {
+  max-width: 300px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+mat-card-header {
+  justify-content: space-around;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

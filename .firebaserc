@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "fruit-market-20d29": {
+      "hosting": {
+        "fruit-market": [
+          "fruit-market-20d29"
+        ]
+      }
+    }
+  }
+}
