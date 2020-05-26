@@ -12,6 +12,7 @@ export class ProductsByCategoryComponent implements OnInit {
   products = [];
   category = '';
   searchInput = '';
+  sortType = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -54,16 +55,29 @@ export class ProductsByCategoryComponent implements OnInit {
     });
   }
 
-  sortProducts(type: string) {
+  // sortProducts(type: string) {
+  //   switch (type) {
+  //     case 'asc':
+  //       this.products.sort((a, b) => a.price - b.price);
+  //       break;
+  //     case 'desc':
+  //       this.products.sort((a, b) => b.price - a.price);
+  //       break;
+  //     default:
+  //       this.products.sort((a, b) => b.price - a.price);
+  //   }
+  // }
+
+  changeSortType(type: string) {
     switch (type) {
       case 'asc':
-        this.products.sort((a, b) => a.price - b.price);
+        this.sortType = 'asc';
         break;
       case 'desc':
-        this.products.sort((a, b) => b.price - a.price);
+        this.sortType = 'desc';
         break;
       default:
-        this.products.sort((a, b) => b.price - a.price);
+        this.sortType = 'asc';
     }
   }
 }

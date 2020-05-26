@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from 'src/app/category.service';
 
 @Component({
   selector: 'app-products-view',
@@ -7,24 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsViewComponent implements OnInit {
   categories = [
-    {
-      name: 'Voće',
-      image: 'fruits.jpg',
-      link: 'voce',
-    },
-    {
-      name: 'Povrće',
-      image: 'vegetables.jpg',
-      link: 'povrce',
-    },
-    {
-      name: 'Sokovi',
-      image: 'juices.jpg',
-      link: 'sokovi',
-    },
+    // {
+    //   name: 'Voće',
+    //   image: 'fruits.jpg',
+    //   link: 'voce',
+    // },
+    // {
+    //   name: 'Povrće',
+    //   image: 'vegetables.jpg',
+    //   link: 'povrce',
+    // },
+    // {
+    //   name: 'Sokovi',
+    //   image: 'juices.jpg',
+    //   link: 'sokovi',
+    // },
   ];
 
-  constructor() {}
+  constructor(private categoryService: CategoryService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.categoryService
+            .getCategories()
+            .subscribe((categories) => {
+              this.categories = categories;
+            });
+  }
 }

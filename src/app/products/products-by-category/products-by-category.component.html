@@ -8,10 +8,10 @@
   <mat-form-field appearance="fill">
     <mat-label>Sortiranje</mat-label>
     <mat-select>
-      <mat-option value="1" (click)="sortProducts('asc')"
+      <mat-option value="1" (click)="changeSortType('asc')"
         >Cena rastuće</mat-option
       >
-      <mat-option value="2" (click)="sortProducts('desc')"
+      <mat-option value="2" (click)="changeSortType('desc')"
         >Cena opadajuće</mat-option
       >
     </mat-select>
@@ -19,7 +19,11 @@
 </mat-card>
 <div class="container">
   <app-single-product
-    *ngFor="let product of products | filter: searchInput:'name'"
+    *ngFor="
+      let product of products
+        | filter: searchInput:'name'
+        | sort: sortType:'price'
+    "
     [product]="product"
   ></app-single-product>
 </div>

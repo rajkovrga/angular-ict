@@ -16,6 +16,14 @@ import { FilterPipe } from './filter.pipe';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeSr from '@angular/common/locales/sr-Latn';
+import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { SortPipe } from './sort.pipe';
+import { CartComponent } from './cart/cart.component';
+registerLocaleData(localeSr);
 
 @NgModule({
   declarations: [
@@ -26,6 +34,10 @@ import { environment } from '../environments/environment';
     SingleProductComponent,
     ProductsByCategoryComponent,
     FilterPipe,
+    HomeComponent,
+    NotFoundComponent,
+    SortPipe,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +49,7 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'sr-Latn' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

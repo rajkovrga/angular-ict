@@ -1,0 +1,53 @@
+<mat-table [dataSource]="cart" class="mat-elevation-z1">
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Naziv </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="quantity">
+    <mat-header-cell *matHeaderCellDef> Količina </mat-header-cell>
+    <mat-cell *matCellDef="let element; let i = index">
+      <button mat-icon-button (click)="onIncrease(i)">
+        <mat-icon>add</mat-icon>
+      </button>
+      {{ element.quantity }}
+      <button mat-icon-button (click)="onDecrease(i)">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <mat-header-cell *matHeaderCellDef> Cena </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.price * element.quantity | currency: "RSD":"code":"1.2-2" }}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <mat-header-cell *matHeaderCellDef> Obriši </mat-header-cell>
+    <mat-cell *matCellDef="let element; let i = index">
+      <button mat-icon-button (click)="onDelete(i)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+<mat-card>
+  <mat-card-header>
+    <mat-card-subtitle>Ukupna cena:</mat-card-subtitle>
+    <mat-card-title>{{
+      totalPrice | currency: "RSD":"code":"1.2-2"
+    }}</mat-card-title>
+    <span class="spacer"></span>
+    <button mat-flat-button color="accent" (click)="onDeleteAll()">
+      Isprazni korpu
+    </button>
+    <button mat-flat-button color="primary">
+      Naruči
+    </button>
+  </mat-card-header>
+</mat-card>

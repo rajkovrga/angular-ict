@@ -11,7 +11,7 @@
     <mat-toolbar>Fruit Market</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="proizvodi">Proizvodi</a>
-      <a mat-list-item routerLink="onama">
+      <a mat-list-item routerLink="korpa">
         Korpa &nbsp;
         <mat-chip-list aria-label="Fish selection">
           <mat-chip color="primary" selected>{{ cartNumber }}</mat-chip>
@@ -31,12 +31,12 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Fruit Market</span>
+      <span><a routerLink="">Fruit Market</a></span>
       <span class="spacer"></span>
       <div [ngClass]="{ hidden: isHandset$ | async }">
         <a routerLink="proizvodi">Proizvodi</a>
         <a routerLink="onama">O nama</a>
-        <a href="#"
+        <a routerLink="korpa"
           ><mat-icon [matBadge]="cartNumber" matBadgeColor="accent"
             >shopping_cart</mat-icon
           ></a

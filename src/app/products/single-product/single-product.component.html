@@ -15,7 +15,7 @@
       >{{ product.weight }}g</mat-card-subtitle
     >
     <mat-card-subtitle *ngIf="product.volume"
-      >{{ product.volume }}l</mat-card-subtitle
+      >{{ product.volume | number: "1.2-2" }}l</mat-card-subtitle
     >
   </mat-card-header>
   <mat-card-actions>
