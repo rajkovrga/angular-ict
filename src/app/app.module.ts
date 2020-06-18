@@ -23,6 +23,7 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SortPipe } from './sort.pipe';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 registerLocaleData(localeSr);
 
 @NgModule({
@@ -38,6 +39,7 @@ registerLocaleData(localeSr);
     NotFoundComponent,
     SortPipe,
     CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

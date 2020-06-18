@@ -9,3 +9,25 @@ button {
 mat-card-header {
   flex-wrap: wrap;
 }
+
+.mat-icon-button {
+  margin-left: 0px;
+}
+
+@media screen and (max-width: 650px) {
+  .mat-header-row {
+    display: none;
+  }
+
+  .mat-row {
+    flex-wrap: wrap;
+    padding-top: 20px;
+  }
+
+  .mat-cell {
+    flex: 1 0 100%;
+    justify-content: center;
+    text-align: center;
+    padding-left: 0px;
+  }
+}

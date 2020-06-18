@@ -34,7 +34,10 @@
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  <mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    @fadeOutLeft
+  ></mat-row>
 </mat-table>
 <mat-card>
   <mat-card-header>
@@ -47,7 +50,7 @@
       Isprazni korpu
     </button>
     <button mat-flat-button color="primary">
-      Naruči
+      <a routerLink="/narudzbina">Naruči</a>
     </button>
   </mat-card-header>
 </mat-card>

@@ -1,0 +1,24 @@
+mat-table {
+  margin-bottom: 20px;
+}
+
+button {
+  margin-left: 10px;
+}
+
+mat-card-header {
+  flex-wrap: wrap;
+}
+
+form {
+  width: 50%;
+  padding: 20px 15px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.error {
+  color: #f00;
+}

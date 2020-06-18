@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/category.service';
+import { fadeInAnimation } from 'src/app/animations';
+import { trigger, transition, useAnimation } from '@angular/animations';
 
 @Component({
   selector: 'app-products-view',
   templateUrl: './products-view.component.html',
   styleUrls: ['./products-view.component.css'],
+  animations: [
+    trigger('productAnimation', [
+      transition('void=>*', [useAnimation(fadeInAnimation)]),
+    ]),
+  ],
 })
 export class ProductsViewComponent implements OnInit {
   categories = [
@@ -28,10 +35,8 @@ export class ProductsViewComponent implements OnInit {
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    this.categoryService
-            .getCategories()
-            .subscribe((categories) => {
-              this.categories = categories;
-            });
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
   }
 }

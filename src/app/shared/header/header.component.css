@@ -31,6 +31,10 @@
   color: #eee;
 }
 
+mat-chip {
+  cursor: pointer;
+}
+
 /* @media (min-width: 582px) {
   .sidenav {
     display: none;

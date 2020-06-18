@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
+import { fadeOutLeft } from '../animations';
+import { transition, useAnimation, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
+  animations: [fadeOutLeft],
 })
 export class CartComponent implements OnInit {
   cart = [];
@@ -16,7 +19,6 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.cart = this.cartService.getCart();
     this.totalPrice = this.cartService.getTotalPrice();
-    console.log(this.cart);
     this.cartService.cartChanged.subscribe((cart: any[]) => {
       this.cart = cart;
       this.totalPrice = this.cartService.getTotalPrice();

@@ -2,11 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'src/app/products.service';
 import { ShoppingCartService } from 'src/app/shopping-cart.service';
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-products-by-category',
   templateUrl: './products-by-category.component.html',
   styleUrls: ['./products-by-category.component.css'],
+  animations: [
+    trigger('productAnimation', [
+      transition('void=>*', [useAnimation(fadeInAnimation)]),
+    ]),
+  ],
 })
 export class ProductsByCategoryComponent implements OnInit {
   products = [];

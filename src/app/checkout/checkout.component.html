@@ -1,0 +1,127 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><h1>Vaši podaci</h1></mat-card-title>
+  </mat-card-header>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Ime</mat-label>
+      <input
+        matInput
+        name="firstname"
+        [(ngModel)]="checkoutData.firstname"
+        #firstname="ngModel"
+        required
+        pattern="^[A-ZŠĐČĆŽ][a-zšđčćž]+$"
+      />
+    </mat-form-field>
+    <div
+      *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)"
+      class="error"
+    >
+      <div *ngIf="firstname.errors.required">
+        Morate uneti ime.
+      </div>
+      <div *ngIf="firstname.errors.pattern && firstname.touched">
+        Ime mora biti ispravnog formata.
+      </div>
+    </div>
+    <mat-form-field>
+      <mat-label>Prezime</mat-label>
+      <input
+        matInput
+        name="lastname"
+        [(ngModel)]="checkoutData.lastname"
+        #lastname="ngModel"
+        required
+        pattern="^[A-ZŠĐČĆŽ][a-zšđčćž]+$"
+      />
+    </mat-form-field>
+    <div
+      *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)"
+      class="error"
+    >
+      <div *ngIf="lastname.errors.required">
+        Morate uneti prezime.
+      </div>
+      <div *ngIf="lastname.errors.pattern && lastname.touched">
+        Prezime mora biti ispravnog formata.
+      </div>
+    </div>
+    <mat-form-field>
+      <mat-label>Adresa</mat-label>
+      <input
+        matInput
+        name="address"
+        [(ngModel)]="checkoutData.address"
+        #address="ngModel"
+        required
+        pattern="^[A-ZŠĐČĆŽ][a-zšđčćž]+(\s[A-zŠĐČĆŽšđčćž][a-zšđčćž]+)*\s\d+[a-z]?$"
+      />
+    </mat-form-field>
+    <div
+      *ngIf="address.invalid && (address.dirty || address.touched)"
+      class="error"
+    >
+      <div *ngIf="address.errors.required">
+        Morate uneti adresu.
+      </div>
+      <div *ngIf="address.errors.pattern && address.touched">
+        Adresa mora biti ispravnog formata.
+      </div>
+    </div>
+    <mat-form-field>
+      <mat-label>Grad</mat-label>
+      <input
+        matInput
+        name="city"
+        [(ngModel)]="checkoutData.city"
+        #city="ngModel"
+        required
+        pattern="^[A-ZŠĐČĆŽ][a-zšđčćž]+(\s[A-ZŠĐČĆŽ][a-zšđčćž]+)*$"
+      />
+    </mat-form-field>
+    <div *ngIf="city.invalid && (city.dirty || city.touched)" class="error">
+      <div *ngIf="city.errors.required">
+        Morate uneti grad.
+      </div>
+      <div *ngIf="city.errors.pattern && city.touched">
+        Grad mora biti ispravnog formata.
+      </div>
+    </div>
+    <mat-form-field>
+      <mat-label>Telefon</mat-label>
+      <input
+        matInput
+        placeholder="+381641234567"
+        name="phone"
+        [(ngModel)]="checkoutData.phone"
+        #phone="ngModel"
+        required
+        pattern="^\+381\d{7,8}$"
+      />
+    </mat-form-field>
+    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error">
+      <div *ngIf="phone.errors.required">
+        Morate uneti telefon.
+      </div>
+      <div *ngIf="phone.errors.pattern && phone.touched">
+        Telefon mora biti ispravnog formata (+38164123457).
+      </div>
+    </div>
+  </form>
+
+  <mat-card-header>
+    <mat-card-subtitle>Ukupna cena:</mat-card-subtitle>
+    <mat-card-title>{{
+      totalPrice | currency: "RSD":"code":"1.2-2"
+    }}</mat-card-title>
+    <span class="spacer"></span>
+    <button mat-flat-button color="accent">
+      <a routerLink="/korpa">Korpa</a>
+    </button>
+    <button mat-flat-button color="primary" (click)="insertOrder()">
+      Naruči
+    </button>
+  </mat-card-header>
+</mat-card>
