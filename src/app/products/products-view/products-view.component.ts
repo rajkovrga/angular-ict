@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CategoryService } from 'src/app/category.service';
 import { fadeInAnimation } from 'src/app/animations';
 import { trigger, transition, useAnimation } from '@angular/animations';
+import { Category } from '../Categorty.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products-view',
@@ -13,30 +15,21 @@ import { trigger, transition, useAnimation } from '@angular/animations';
     ]),
   ],
 })
-export class ProductsViewComponent implements OnInit {
-  categories = [
-    // {
-    //   name: 'Voće',
-    //   image: 'fruits.jpg',
-    //   link: 'voce',
-    // },
-    // {
-    //   name: 'Povrće',
-    //   image: 'vegetables.jpg',
-    //   link: 'povrce',
-    // },
-    // {
-    //   name: 'Sokovi',
-    //   image: 'juices.jpg',
-    //   link: 'sokovi',
-    // },
-  ];
+export class ProductsViewComponent implements OnInit, OnDestroy {
+  categories: Category[] = [];
+  subscription: Subscription;
 
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe((categories) => {
-      this.categories = categories;
-    });
+    this.subscription = this.categoryService
+      .getCategories()
+      .subscribe((categories) => {
+        this.categories = categories;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

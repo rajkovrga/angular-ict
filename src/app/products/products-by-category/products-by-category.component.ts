@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'src/app/products.service';
 import { ShoppingCartService } from 'src/app/shopping-cart.service';
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { fadeInAnimation } from 'src/app/animations';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products-by-category',
@@ -15,11 +16,12 @@ import { fadeInAnimation } from 'src/app/animations';
     ]),
   ],
 })
-export class ProductsByCategoryComponent implements OnInit {
+export class ProductsByCategoryComponent implements OnInit, OnDestroy {
   products = [];
   category = '';
   searchInput = '';
   sortType = '';
+  subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,7 +34,7 @@ export class ProductsByCategoryComponent implements OnInit {
       switch (params.get('category')) {
         case 'voce':
           this.category = 'voce';
-          this.productsService
+          this.subscription = this.productsService
             .getProducts(this.category)
             .subscribe((products) => {
               this.products = products;
@@ -40,7 +42,7 @@ export class ProductsByCategoryComponent implements OnInit {
           break;
         case 'povrce':
           this.category = 'povrce';
-          this.productsService
+          this.subscription = this.productsService
             .getProducts(this.category)
             .subscribe((products) => {
               this.products = products;
@@ -48,7 +50,7 @@ export class ProductsByCategoryComponent implements OnInit {
           break;
         case 'sokovi':
           this.category = 'sokovi';
-          this.productsService
+          this.subscription = this.productsService
             .getProducts(this.category)
             .subscribe((products) => {
               this.products = products;
@@ -62,18 +64,9 @@ export class ProductsByCategoryComponent implements OnInit {
     });
   }
 
-  // sortProducts(type: string) {
-  //   switch (type) {
-  //     case 'asc':
-  //       this.products.sort((a, b) => a.price - b.price);
-  //       break;
-  //     case 'desc':
-  //       this.products.sort((a, b) => b.price - a.price);
-  //       break;
-  //     default:
-  //       this.products.sort((a, b) => b.price - a.price);
-  //   }
-  // }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   changeSortType(type: string) {
     switch (type) {

@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { Checkout } from './Checkout.model';
 import { CheckoutService } from '../checkout.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css'],
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
   checkoutData: Checkout = {
     firstname: '',
     lastname: '',
@@ -21,6 +22,7 @@ export class CheckoutComponent implements OnInit {
   };
   totalPrice = 0;
   error = false;
+  subscription: Subscription;
 
   constructor(
     private cartService: ShoppingCartService,
@@ -35,15 +37,21 @@ export class CheckoutComponent implements OnInit {
     }
     this.checkoutData.cart = this.cartService.getCart();
     this.totalPrice = this.cartService.getTotalPrice();
-    this.checkoutService.orderSuccess.subscribe((status: Promise<any>) => {
-      status
-        .then(() => {
-          this.error = false;
-        })
-        .catch((error) => {
-          this.error = true;
-        });
-    });
+    this.subscription = this.checkoutService.orderSuccess.subscribe(
+      (status: Promise<any>) => {
+        status
+          .then(() => {
+            this.error = false;
+          })
+          .catch((error) => {
+            this.error = true;
+          });
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   insertOrder() {
